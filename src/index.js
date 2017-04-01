@@ -1,5 +1,6 @@
 import fs from 'fs';
 import handlebars from 'handlebars';
+import he from 'he';
 
 import Ajv from 'ajv';
 
@@ -15,6 +16,9 @@ const _getTemplateUrl = function (name) {
 const Revoice = {};
 
 Revoice.DEFAULT_TEMPLATE = 'default';
+Revoice.DEFAULT_OPTIONS = {
+  template: Revoice.DEFAULT_TEMPLATE,
+}
 
 Revoice.getTemplate = function (template = Revoice.DEFAULT_TEMPLATE) {
   return new Promise(function (resolve, reject) {
@@ -30,28 +34,42 @@ Revoice.getTemplate = function (template = Revoice.DEFAULT_TEMPLATE) {
   })
 }
 
-Revoice.validateInvoiceDataObject = function (data) {
+Revoice.validateInvoiceDataObject = function (data = {}) {
   const ajv = new Ajv({
     allErrors: true,
     schemas: [ InvoiceSchema, ItemSchema ],
   });
   const validate = ajv.compile(InvoiceSchema);
   const valid = validate(data);
-  return valid ? true : validate.errors;
+  return valid ? true : validate.errors.map(errObj => errObj.message).join('; ');
 }
 
-Revoice.generateInvoice = function (template = Revoice.DEFAULT_TEMPLATE, data = {}, options = {}) {
+Revoice.generateInvoice = function (data = {}, options = Revoice.DEFAULT_OPTIONS) {
   return new Promise(function (resolve, reject) {
 
     // Validates the data object to ensure it has all the required fields
-    Revoice.validateInvoiceDataObject(data);
+    const isValidInvoiceDataObject = Revoice.validateInvoiceDataObject(data);
+
+    if (!isValidInvoiceDataObject) {
+      reject(new Error(errorStrings.INVALID_DATA_OBJECT + isValidInvoiceDataObject))
+    }
 
     // Get the template and substitute the values in
-    Revoice.getTemplate(template)
+    Revoice.getTemplate(options.template)
       .then(res => {
         const template = handlebars.compile(res);
-        const result = template(data);
+        const result = he.decode(template(data));
         resolve(result);
+      })
+      .catch(err => reject(err));
+  });
+}
+
+Revoice.generateHTMLInvoice = function (data = {}, options = Revoice.DEFAULT_OPTIONS) {
+  return new Promise(function (resolve, reject) {
+    Revoice.generateInvoice(data, options)
+      .then(html => {
+        fs.writeFile("tmp/test.html", html, (err, res) => err ? reject(err) : resolve(res));
       })
       .catch(err => reject(err));
   });

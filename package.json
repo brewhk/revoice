@@ -19,7 +19,6 @@
   "author": "Daniel Li <dan@danyll.com>",
   "license": "MIT",
   "devDependencies": {
-    "ajv": "^4.11.5",
     "babel-core": "^6.24.0",
     "babel-loader": "^6.4.1",
     "babel-plugin-istanbul": "^4.1.1",
@@ -35,6 +34,8 @@
     "webpack": "beta"
   },
   "dependencies": {
-    "handlebars": "^4.0.6"
+    "ajv": "^5.0.4-beta",
+    "handlebars": "^4.0.6",
+    "he": "^1.1.1"
   }
 }

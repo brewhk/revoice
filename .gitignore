@@ -70,3 +70,4 @@ typings/
 .nyc_output/
 coverage/
 BUILDTMP/
+tmp/

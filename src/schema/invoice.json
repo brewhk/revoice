@@ -10,27 +10,41 @@
       "type": "string"
     },
     "date": {
+      "title": "Date",
+      "description": "Date of Invoice",
       "type": "string",
       "format": "date"
     },
     "issuer": {
+      "type": "object",
+      "required": ["name", "address", "contact"],
       "properties": {
         "name": {
-
+          "type": "string"
+        },
+        "logo": {
+          "type": "string",
+          "format": "uri"
         },
         "address": {
-
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 6
         },
         "contact": {
+          "type": "object",
+          "required": ["tel", "email"],
           "properties": {
             "tel": {
-
+              "type": "string"
             },
             "fax": {
-
+              "type": "string"
             },
             "email": {
-
+              "type": "string",
+              "format": "email"
             },
             "website": {
               "type": "string",
@@ -41,12 +55,17 @@
       }
     },
     "invoicee": {
+      "type": "object",
+      "required": ["name"],
       "properties": {
         "name": {
-
+          "type": "string"
         },
         "address": {
-
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 6
         }
       }
     },
@@ -58,5 +77,8 @@
         "$ref": "item.json#"
       }
     }
+  },
+  "comments": {
+    "type": "string"
   }
 }

@@ -7,15 +7,35 @@
   <title>Document</title>
 </head>
 <body>
-  <img src="http://www.brew.com.hk/images/logos/brew.png" alt="Sample logo">
+  <div>Invoice</div>
   <div>
-    {{#company}}
+    <p>
+      Invoice #: {{id}}<br/>
+      Date: {{date}}
+    </p>
+  </div>
+  <img src="{{issuer.logo}}" alt="Logo">
+  <div>
+    {{#issuer}}
       {{name}}
-      {{address}}
-      {{email}}
-      {{tel}}
-      {{fax}}
-    {{/company}}
+      {{#each address}}
+        {{this}}
+      {{/each}}
+      {{#contact}}
+        {{tel}}
+        {{fax}}
+        {{email}}
+        {{website}}
+      {{/contact}}
+    {{/issuer}}
+  </div>
+  <div>
+    {{#invoicee}}
+      {{name}}
+      {{#each address}}
+        {{this}}
+      {{/each}}
+    {{/invoicee}}
   </div>
 </body>
 </html>

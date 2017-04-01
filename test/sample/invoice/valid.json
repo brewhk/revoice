@@ -1,0 +1,35 @@
+{
+  "id": "yvjhn76b87808",
+  "date": "2017-02-02",
+  "issuer": {
+    "name": "Brew Creative Limited",
+    "logo": "http://www.brew.com.hk/images/logos/brew.png",
+    "address": [
+      "1905, Nan Fung Centre",
+      "264-298 Castle Peak Road",
+      "Tsuen Wan",
+      "New Territories",
+      "Hong Kong"
+    ],
+    "contact": {
+      "tel": "+852 1234 5678",
+      "email": "dan@brew.com.hk",
+      "website": "http://www.brew.com.hk/"
+    }
+  },
+  "invoicee": {
+    "name": "Cersei Lannister",
+    "address": [
+      "Great Hall",
+      "Red Keep",
+      "King's Landing",
+      "Westeros"
+    ]
+  },
+  "items": [{
+    "description": "",
+    "date": "2017-02-02",
+    "amount": 50.00,
+    "tax": 10.00
+  }]
+}

@@ -33,4 +33,7 @@ module.exports = {
       'handlebars' : 'handlebars/dist/handlebars.min.js'
     }
   },
+  stats: {
+    warnings: false,
+  }
 };

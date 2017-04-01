@@ -3,9 +3,26 @@
   "id": "item.json#",
   "required": ["description", "date"],
   "properties": {
-    "description": { "type": "string" },
-    "date": { "type": "string", "format": "date" },
-    "amount": { "type": "number" },
-    "tax": { "type": "number" }
+    "description": {
+      "title": "Description",
+      "description": "Description of the goods or service",
+      "type": "string"
+    },
+    "date": {
+      "title": "Supply Date",
+      "description": "The date the goods or service were provided",
+      "type": "string",
+      "format": "date"
+    },
+    "amount": {
+      "title": "Amount",
+      "description": "Amount being charged (excluding tax)",
+      "type": "number"
+    },
+    "tax": {
+      "title": "Tax",
+      "description": "Amount of tax charged",
+      "type": "number"
+    }
   }
 }
