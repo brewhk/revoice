@@ -1,0 +1,62 @@
+{
+  "id": "invoice.json#",
+  "description": "Invoice Schema for Revoice",
+  "type": "object",
+  "required": ["id", "date", "issuer", "invoicee", "items"],
+  "properties": {
+    "id": {
+      "title": "ID",
+      "description": "Unique Invoice ID",
+      "type": "string"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "issuer": {
+      "properties": {
+        "name": {
+
+        },
+        "address": {
+
+        },
+        "contact": {
+          "properties": {
+            "tel": {
+
+            },
+            "fax": {
+
+            },
+            "email": {
+
+            },
+            "website": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "invoicee": {
+      "properties": {
+        "name": {
+
+        },
+        "address": {
+
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "item.json#"
+      }
+    }
+  }
+}

@@ -2,7 +2,7 @@
   "name": "revoice",
   "version": "0.0.1",
   "description": "Generate HTML / PDF receipts and invoices",
-  "main": "index.js",
+  "main": "dist/lib.js",
   "scripts": {
     "start": "yarn test -- --watch & yarn watch",
     "build": "./node_modules/webpack/bin/webpack.js",
@@ -19,6 +19,7 @@
   "author": "Daniel Li <dan@danyll.com>",
   "license": "MIT",
   "devDependencies": {
+    "ajv": "^4.11.5",
     "babel-core": "^6.24.0",
     "babel-loader": "^6.4.1",
     "babel-plugin-istanbul": "^4.1.1",

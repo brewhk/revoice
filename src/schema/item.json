@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "id": "item.json#",
+  "required": ["description", "date"],
+  "properties": {
+    "description": { "type": "string" },
+    "date": { "type": "string", "format": "date" },
+    "amount": { "type": "number" },
+    "tax": { "type": "number" }
+  }
+}

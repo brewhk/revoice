@@ -23,15 +23,18 @@ describe('Revoice', function() {
       return expect(Revoice.getTemplate(randomstring.generate())).to.eventually.be.rejectedWith(Error, "Template not found");
     });
   });
-  describe('#generate()', function() {
+  describe('#generateInvoice()', function() {
     it('should exists', function() {
-      expect(typeof Revoice.generate).to.be.equal('function');
+      expect(typeof Revoice.generateInvoice).to.be.equal('function');
+    });
+    it('should return a promise', function() {
+      expect(Revoice.generateInvoice()).to.be.a('promise');
     });
     it('should throw an error when the template could not be found', function() {
-      return expect(Revoice.generate(randomstring.generate())).to.eventually.be.rejectedWith(Error, "Template not found");
+      return expect(Revoice.generateInvoice(randomstring.generate())).to.eventually.be.rejectedWith(Error, "Template not found");
     });
     it('should return the default template when none are supplied', function() {
-      return expect(Revoice.generate()).to.eventually.have.string('<!DOCTYPE html>');
+      return expect(Revoice.generateInvoice()).to.eventually.have.string('<!DOCTYPE html>');
     });
   });
 });
