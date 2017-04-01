@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 chai.use(chaiAsPromised);
@@ -59,7 +61,13 @@ describe('Revoice', function() {
       return expect(Revoice.generateInvoice()).to.eventually.have.string('<!DOCTYPE html>');
     });
   });
-  describe('#generateHTMLInvoice()', function() {
+  describe('#generateHTMLInvoice()', function () {
+    before(function () {
+      const dir = './tmp';
+      if (!fs.existsSync(dir)){
+          fs.mkdirSync(dir);
+      }
+    });
     it('should exists', function() {
       expect(typeof Revoice.generateHTMLInvoice).to.be.equal('function');
     });
