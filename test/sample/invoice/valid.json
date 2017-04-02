@@ -1,6 +1,8 @@
 {
   "id": "yvjhn76b87808",
   "date": "2017-02-02",
+  "due": "2017-02-16",
+  "currency": "GBP",
   "issuer": {
     "name": "Brew Creative Limited",
     "logo": "http://www.brew.com.hk/images/logos/brew.png",
@@ -24,12 +26,44 @@
       "Red Keep",
       "King's Landing",
       "Westeros"
-    ]
+    ],
+    "contact": {
+      "name": "Jaime Lannister",
+      "email": "jaime@lannister.com"
+    }
   },
   "items": [{
-    "description": "",
+    "title": "Amazon Echo Dot (2nd Generation)",
+    "description": "Black",
     "date": "2017-02-02",
-    "amount": 50.00,
-    "tax": 10.00
+    "amount": 39.99,
+    "tax": 10.00,
+    "quantity": 12
+  },
+  {
+    "title": "Kniterate",
+    "description": "Batch 1, Early Bird Offer",
+    "date": "2017-02-02",
+    "amount": 3599.20,
+    "tax": 899.80,
+    "quantity": 2
+  },
+  {
+    "title": "Minim Playing Cards",
+    "description": "Black",
+    "date": "2017-02-02",
+    "amount": 7.96,
+    "tax": 1.99,
+    "quantity": 2,
+    "link": "https://shop.coolmaterial.com/products/minim-playing-cards?variant=17610497285"
+  },
+  {
+    "title": "Sparkling Diamond Light",
+    "description": "Black",
+    "date": "2017-02-02",
+    "amount": 80.00,
+    "tax": 20.00,
+    "quantity": 1,
+    "link": "https://fancy.com/things/1386211674221977567/Sparkling-Diamond-Light?utm=timeline_featured"
   }]
 }

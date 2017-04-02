@@ -1,12 +1,23 @@
 {
   "type": "object",
   "id": "item.json#",
-  "required": ["description", "date"],
+  "required": ["title", "date", "amount", "tax", "quantity"],
   "properties": {
+    "title": {
+      "title": "Title",
+      "description": "Title of the goods or service",
+      "type": "string"
+    },
     "description": {
       "title": "Description",
       "description": "Description of the goods or service",
       "type": "string"
+    },
+    "link": {
+      "title": "Link",
+      "description": "URL link to the web page for the product or sevice",
+      "type": "string",
+      "format": "uri"
     },
     "date": {
       "title": "Supply Date",
@@ -15,14 +26,19 @@
       "format": "date"
     },
     "amount": {
-      "title": "Amount",
-      "description": "Amount being charged (excluding tax)",
+      "title": "Unit Price",
+      "description": "Unit Price per item (excluding tax)",
       "type": "number"
     },
     "tax": {
       "title": "Tax",
-      "description": "Amount of tax charged",
+      "description": "Amount of tax charged for unit",
       "type": "number"
+    },
+    "quantity": {
+      "title": "Quantity",
+      "description": "Number of units",
+      "type": "integer"
     }
   }
 }

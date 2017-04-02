@@ -26,16 +26,19 @@
     "babel-register": "^6.24.0",
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
+    "chai-fs": "^1.0.0",
     "cross-env": "^4.0.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "nyc": "^10.2.0",
     "randomstring": "^1.1.5",
+    "rimraf": "^2.6.1",
     "webpack": "beta"
   },
   "dependencies": {
     "ajv": "^5.0.4-beta",
     "handlebars": "^4.0.6",
-    "he": "^1.1.1"
+    "he": "^1.1.1",
+    "phantom": "^4.0.1"
   }
 }

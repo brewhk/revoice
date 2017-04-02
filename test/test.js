@@ -1,8 +1,11 @@
 import fs from 'fs';
+import rimraf from 'rimraf';
 
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
+import chaiFs from 'chai-fs';
 chai.use(chaiAsPromised);
+chai.use(chaiFs);
 const expect = chai.expect;
 
 import randomstring from 'randomstring';
@@ -62,11 +65,13 @@ describe('Revoice', function() {
     });
   });
   describe('#generateHTMLInvoice()', function () {
-    before(function () {
-      const dir = './tmp';
-      if (!fs.existsSync(dir)){
-          fs.mkdirSync(dir);
-      }
+    before(function (done) {
+      const path = './tmp';
+      // Remove and re-created directory
+      rimraf(path, function () {
+        fs.mkdirSync(path);
+        done();
+      });
     });
     it('should exists', function() {
       expect(typeof Revoice.generateHTMLInvoice).to.be.equal('function');
@@ -77,8 +82,13 @@ describe('Revoice', function() {
     it('should throw an error when the template could not be found', function() {
       return expect(Revoice.generateHTMLInvoice({}, { template: randomstring.generate() })).to.eventually.be.rejectedWith(Error, "Template not found");
     });
-    it('should return the default template when none are supplied', function() {
-      return expect(Revoice.generateHTMLInvoice('default', ValidInvoice)).to.eventually.be.an('undefined');
+    describe('should generate output from the default template when none are supplied', function () {
+      before(function () {
+        return Revoice.generateHTMLInvoice(ValidInvoice, { template: 'default' });
+      });
+      it('should generate a HTML file', function () {
+        return expect('./tmp').to.be.a.directory().with.files(['index.html', 'index.pdf']);
+      })
     });
   });
 });
