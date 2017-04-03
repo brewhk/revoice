@@ -19,7 +19,7 @@ const Revoice = {};
 Revoice.DEFAULT_TEMPLATE = 'default';
 Revoice.DEFAULT_OPTIONS = {
   template: Revoice.DEFAULT_TEMPLATE,
-  format: 'A4',
+  format: 'A3',
   orientation: 'portrait',
   margin: '1cm',
 }
@@ -124,7 +124,7 @@ Revoice.generateHTMLInvoice = function (data = {}, options = Revoice.DEFAULT_OPT
               })
               .then(page => {
                 page.property('paperSize', {
-                  format: options.format || 'A4',
+                  format: options.format || 'A3',
                   orientation: options.orientation || 'portrait',
                   margin: options.margin || '1cm',
                 });

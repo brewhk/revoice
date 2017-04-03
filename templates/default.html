@@ -53,30 +53,32 @@
     }
 
     .invoice-info-block {
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-between;
+        width: 100%;
         padding-top: 32px;
         padding-left: 8px;
         padding-right: 8px;
         padding-bottom: 32px;
         border-bottom: 1px solid black;
+        display: table;
     }
+
+    .invoicee-info-block,
+    .invoice-summary-block {
+      display: table-cell;
+      width: 49.5%;
+    }
+    .invoice-summary-block__heading,
+    .invoice-summary-block__value {
+      display: inline-block;
+      width: 49.5%;
+      text-align: right;
+      height: 32px;
+    }
+
     .invoice-summary-block__heading {
-        width: 50%;
-        text-align: right;
         font-weight: 700;
     }
 
-    .invoice-summary-block {
-      display: flex;
-      flex-wrap: wrap;
-    }
-
-    .invoice-summary-block__value {
-        width: 50%;
-        text-align: right;
-    }
     span.invoicee-name {
         font-weight: 700;
     }
@@ -84,6 +86,9 @@
     .items-block {
         margin-top: 32px;
         margin-bottom: 32px;
+    }
+    table.item-listing {
+        width: 100%;
     }
 
     .item-listing__header,
@@ -96,12 +101,13 @@
         padding-bottom: 8px;
         border-bottom: 1px solid black;
     }
-    .item-listing__item {
+    td {
         padding: 16px 0px;
     }
     .item-listing__header__item,
     .item-listing__item__item {
-        width: 70%;
+        text-align: left;
+        width: 60%;
     }
 
     .item-listing__header__unit-price,
@@ -148,6 +154,12 @@
         text-align: right;
     }
 
+
+    .items-subtotal__heading,
+    .items-tax__heading,
+    .items-grand-total__heading {
+      text-align: right;
+    }
 
   </style>
 </head>
@@ -209,7 +221,7 @@
         {{/invoicee}}
       </div>
       <div class="invoice-summary-block">
-        <div class="invoice-summary-block__heading">Invoice number</div>
+        <div class="invoice-summary-block__heading"><b>Invoice number</b></div>
         <div class="invoice-summary-block__value">{{id}}</div>
         <div class="invoice-summary-block__heading">Invoice date</div>
         <div class="invoice-summary-block__value">{{date}}</div>
@@ -220,54 +232,52 @@
       </div>
     </div>
     <div class="items-block">
-      <div class="item-listing">
-        <div class="item-listing__header">
-          <div class="item-listing__header__item">Item</div>
-          <div class="item-listing__header__unit-price">Unit Price (Tax)</div>
-          <div class="item-listing__header__quantity">Quantity</div>
-          <div class="item-listing__header__line-total">Line Total</div>
-        </div>
+      <table class="item-listing">
+        <tr class="item-listing__header">
+          <th class="item-listing__header__item">Item</th>
+          <th class="item-listing__header__unit-price">Unit Price (Tax)</th>
+          <th class="item-listing__header__quantity">Quantity</th>
+          <th class="item-listing__header__line-total">Line Total</th>
+        </tr>
         {{#each items}}
-          <div class="item-listing__item">
-            <div class="item-listing__item__item">
+          <tr class="item-listing__item">
+            <td class="item-listing__item__item">
               <span class="item-listing__item__title">{{title}}</span><br/>
               <span class="item-listing__item__description">{{description}}</span>
-            </div>
-            <div class="item-listing__item__unit-price-block">
+            </td>
+            <td class="item-listing__item__unit-price-block">
               <span class="item-listing__item__unit-price">{{currency ../currency (format (sum amount tax))}}</span><br/>
               <span class="item-listing__item__tax">({{format tax}})</span>
-            </div>
-            <div class="item-listing__item__quantity">{{quantity}}</div>
-            <div class="item-listing__item__line-total">{{currency ../currency (format (product quantity (sum amount tax)))}}</div>
-          </div>
+            </td>
+            <td class="item-listing__item__quantity">{{quantity}}</td>
+            <td class="item-listing__item__line-total">{{currency ../currency (format (product quantity (sum amount tax)))}}</td>
+          </tr>
         {{/each}}
       </div>
-      <div class="items-summary-block">
-        <div class="items-subtotal-block">
-          <div class="items-subtotal__heading">
-            Subtotal
-          </div>
-          <div class="items-subtotal__value">
-            {{currency currency (format (subtotal items))}}
-          </div>
-        </div>
-        <div class="items-tax-block">
-          <div class="items-tax__heading">
-            Tax
-          </div>
-          <div class="items-tax__value">
-            {{currency currency (format (taxtotal items))}}
-          </div>
-        </div>
-        <div class="items-grand-total-block">
-          <div class="items-tax__heading">
-            Grand Total
-          </div>
-          <div class="items-grand-total__value">
-            {{currency currency (format (grandtotal items))}}
-          </div>
-        </div>
-      </div>
+      <tr class="items-subtotal-block">
+        <td class="items-subtotal__heading" colspan="3">
+          Subtotal
+        </td>
+        <td class="items-subtotal__value">
+          {{currency currency (format (subtotal items))}}
+        </td>
+      </tr>
+      <tr class="items-tax-block">
+        <td class="items-tax__heading" colspan="3">
+          Tax
+        </td>
+        <td class="items-tax__value">
+          {{currency currency (format (taxtotal items))}}
+        </td>
+      </tr>
+      <tr class="items-grand-total-block">
+        <td class="items-grand-total__heading" colspan="3">
+          Grand Total
+        </td>
+        <td class="items-grand-total__value">
+          {{currency currency (format (grandtotal items))}}
+        </td>
+      </tr>
     </div>
   </div>
 </body>
