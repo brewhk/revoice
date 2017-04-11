@@ -8,7 +8,7 @@
     "build": "./node_modules/webpack/bin/webpack.js",
     "watch": "./node_modules/webpack/bin/webpack.js --watch",
     "test": "./node_modules/mocha/bin/mocha --require babel-register",
-    "coverage": "nyc yarn test"
+    "coverage": "cross-env NODE_ENV=test nyc yarn test"
   },
   "keywords": [
     "receipt",
@@ -19,12 +19,9 @@
   "author": "Daniel Li <dan@danyll.com>",
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.24.1",
     "babel-core": "^6.24.0",
-    "babel-istanbul": "^0.12.2",
     "babel-loader": "^6.4.1",
     "babel-plugin-istanbul": "^4.1.1",
-    "babel-preset-env": "^1.3.3",
     "babel-preset-es2015": "^6.24.0",
     "babel-register": "^6.24.0",
     "chai": "^3.5.0",
