@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <title>Document</title>
+  <style>
+    html {
+        font-family: 'Lato', sans-serif;
+        font-size: 10px;
+    }
+    html, body {
+        margin: 0;
+        padding: 0;
+    }
+    body {
+      font-size: 1.6rem;
+    }
+    .content-container {
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px;
+    }
+
+    .issuer-logo {
+        width: 80px;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .header {
+        position: relative;
+        text-align: right;
+        border-bottom: 1px solid black;
+        padding: 8px;
+        padding-bottom: 16px;
+    }
+    .document-type {
+        margin-bottom: 16px;
+        font-size: 2em;
+        font-weight: 700;
+    }
+
+    .issuer-name {
+        font-weight: 700;
+    }
+    .issuer-contact {
+      font-size: 1.4rem;
+    }
+
+    .invoice-info-block {
+        width: 100%;
+        padding-top: 32px;
+        padding-left: 8px;
+        padding-right: 8px;
+        padding-bottom: 32px;
+        border-bottom: 1px solid black;
+        display: table;
+    }
+
+    .invoicee-info-block,
+    .invoice-summary-block {
+      display: table-cell;
+      width: 49.5%;
+    }
+    .invoice-summary-block__heading,
+    .invoice-summary-block__value {
+      display: inline-block;
+      width: 49.5%;
+      text-align: right;
+      height: 32px;
+    }
+
+    .invoice-summary-block__heading {
+        font-weight: 700;
+    }
+
+    span.invoicee-name {
+        font-weight: 700;
+    }
+
+    .items-block {
+        margin-top: 32px;
+        margin-bottom: 32px;
+    }
+    table.item-listing {
+        width: 100%;
+    }
+
+    .item-listing__header,
+    .item-listing__item {
+        display: flex;
+    }
+
+    .item-listing__header {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid black;
+    }
+    td {
+        padding: 16px 0px;
+    }
+    .item-listing__header__item,
+    .item-listing__item__item {
+        text-align: left;
+        width: 60%;
+    }
+
+    .item-listing__header__unit-price,
+    .item-listing__item__unit-price-block {
+        width: 15%;
+        text-align: right;
+    }
+
+    .item-listing__header__quantity,
+    .item-listing__item__quantity {
+        width: 10%;
+        text-align: right;
+    }
+
+    .item-listing__header__line-total,
+    .item-listing__item__line-total {
+        width: 15%;
+        text-align: right;
+    }
+
+    span.item-listing__item__title {
+        font-weight: 700;
+    }
+
+    span.item-listing__item__description {
+        color: #666;
+        font-size: 1.4rem;
+    }
+
+    .items-summary-block {
+        border-top: 2px solid black;
+    }
+
+    .items-subtotal-block, .items-tax-block, .items-grand-total-block {
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid black;
+    }
+
+    .items-subtotal__value, .items-tax__value, .items-grand-total__value {
+        width: 15%;
+        text-align: right;
+    }
+
+
+    .items-subtotal__heading,
+    .items-tax__heading,
+    .items-grand-total__heading {
+      text-align: right;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="content-container">
+    <div class="header">
+      <img class="issuer-logo" src="http://www.brew.com.hk/images/logos/brew.png" alt="Logo">
+      <div class="document-type">Invoice</div>
+      <div class="issuer-info-block">
+          <span class="issuer-name">Brew Creative Limited</span><br/>
+          <p class="issuer-address">
+              1905, Nan Fung Centre<br/>
+              264-298 Castle Peak Road<br/>
+              Tsuen Wan<br/>
+              New Territories<br/>
+              Hong Kong<br/>
+          </p>
+          <p class="issuer-contact">
+                <span class="issuer-tel">+852 1234 5678</span><br/>
+                <span class="issuer-email">dan@brew.com.hk</span><br/>
+                <span class="issuer-website">http://www.brew.com.hk/</span><br/>
+          </p>
+      </div>
+    </div>
+    <div class="invoice-info-block">
+      <div class="invoicee-info-block">
+        Bill to:<br/>
+          <span class="invoicee-name">Cersei Lannister</span><br/>
+          <p class="invoicee-address">
+              Great Hall<br/>
+              Red Keep<br/>
+              King's Landing<br/>
+              Westeros<br/>
+          </p>
+          <span class="invoicee-contact">
+                <span class="invoicee-contact__name" style="font-weight:700">Jaime Lannister</span><br/>
+                <span class="invoicee-contact__email">jaime@lannister.com</span><br/>
+          </span>
+      </div>
+      <div class="invoice-summary-block">
+        <div class="invoice-summary-block__heading"><b>Invoice ID</b></div>
+        <div class="invoice-summary-block__value">yvjhn76b87808</div>
+        <div class="invoice-summary-block__heading">Invoice date</div>
+        <div class="invoice-summary-block__value">2017-02-02</div>
+        <div class="invoice-summary-block__heading">Due date</div>
+        <div class="invoice-summary-block__value">2017-02-16</div>
+        <div class="invoice-summary-block__heading">Amount due</div>
+        <div class="invoice-summary-block__value">£9,717.78</div>
+      </div>
+    </div>
+    <div class="items-block">
+      <table class="item-listing">
+        <tr class="item-listing__header">
+          <th class="item-listing__header__item">Item</th>
+          <th class="item-listing__header__unit-price">Unit Price (Tax)</th>
+          <th class="item-listing__header__quantity">Quantity</th>
+          <th class="item-listing__header__line-total">Line Total</th>
+        </tr>
+          <tr class="item-listing__item">
+            <td class="item-listing__item__item">
+              <span class="item-listing__item__title">Amazon Echo Dot (2nd Generation)</span><br/>
+              <span class="item-listing__item__description">Black</span>
+            </td>
+            <td class="item-listing__item__unit-price-block">
+              <span class="item-listing__item__unit-price">£49.99</span><br/>
+              <span class="item-listing__item__tax">(10.00)</span>
+            </td>
+            <td class="item-listing__item__quantity">12</td>
+            <td class="item-listing__item__line-total">£599.88</td>
+          </tr>
+          <tr class="item-listing__item">
+            <td class="item-listing__item__item">
+              <span class="item-listing__item__title">Kniterate</span><br/>
+              <span class="item-listing__item__description">Batch 1, Early Bird Offer</span>
+            </td>
+            <td class="item-listing__item__unit-price-block">
+              <span class="item-listing__item__unit-price">£4,499.00</span><br/>
+              <span class="item-listing__item__tax">(899.80)</span>
+            </td>
+            <td class="item-listing__item__quantity">2</td>
+            <td class="item-listing__item__line-total">£8,998.00</td>
+          </tr>
+          <tr class="item-listing__item">
+            <td class="item-listing__item__item">
+              <span class="item-listing__item__title">Minim Playing Cards</span><br/>
+              <span class="item-listing__item__description">Black</span>
+            </td>
+            <td class="item-listing__item__unit-price-block">
+              <span class="item-listing__item__unit-price">£9.95</span><br/>
+              <span class="item-listing__item__tax">(1.99)</span>
+            </td>
+            <td class="item-listing__item__quantity">2</td>
+            <td class="item-listing__item__line-total">£19.90</td>
+          </tr>
+          <tr class="item-listing__item">
+            <td class="item-listing__item__item">
+              <span class="item-listing__item__title">Sparkling Diamond Light</span><br/>
+              <span class="item-listing__item__description">Black</span>
+            </td>
+            <td class="item-listing__item__unit-price-block">
+              <span class="item-listing__item__unit-price">£100.00</span><br/>
+              <span class="item-listing__item__tax">(20.00)</span>
+            </td>
+            <td class="item-listing__item__quantity">1</td>
+            <td class="item-listing__item__line-total">£100.00</td>
+          </tr>
+      </div>
+      <tr class="items-subtotal-block">
+        <td class="items-subtotal__heading" colspan="3">
+          Subtotal
+        </td>
+        <td class="items-subtotal__value">
+          £7,774.20
+        </td>
+      </tr>
+      <tr class="items-tax-block">
+        <td class="items-tax__heading" colspan="3">
+          Tax
+        </td>
+        <td class="items-tax__value">
+          £1,943.58
+        </td>
+      </tr>
+      <tr class="items-grand-total-block">
+        <td class="items-grand-total__heading" colspan="3">
+          Grand Total
+        </td>
+        <td class="items-grand-total__value">
+          £9,717.78
+        </td>
+      </tr>
+    </div>
+  </div>
+</body>
+</html>
