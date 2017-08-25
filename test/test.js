@@ -30,6 +30,9 @@ describe('Revoice', function() {
     it('should throw an error when the template could not be found', function() {
       return expect(Revoice.getTemplate(randomstring.generate())).to.eventually.be.rejectedWith(Error, "Template not found");
     });
+    it('should allow user to specify their own template path', function() {
+      return expect(Revoice.getTemplate('./test/sample/templates/test.html')).to.eventually.have.string('Q8lF9cWGBRay89xiYv5lOSjE13kJI09pGXrq5hYNdo48DBxHH5NlnIMjt111RGT');
+    });
   });
   describe('#validateInvoiceDataObject()', function() {
     it('should exists', function() {

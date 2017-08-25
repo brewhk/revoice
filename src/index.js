@@ -10,8 +10,13 @@ import ItemSchema from './schema/item.json';
 
 import * as errorStrings from './errors.js';
 
-const _getTemplateUrl = function (name) {
-  return `./templates/${name}.html`;
+const _getTemplateUrl = function _getTemplateUrl(template) {
+  // If the template is a alphanumeric string,
+  // we assume it's using a pre-defined template
+  // and we return the path to it
+  // Otherwise, we treat it as a user-provided path,
+  // and simply return that
+  return /^[a-zA-Z0-9]+$/.test(template) ? `./templates/${template}.html` : template;
 }
 
 const Revoice = {};
@@ -40,6 +45,7 @@ Revoice.getTemplate = function (template = Revoice.DEFAULT_TEMPLATE) {
 
 Revoice.validateInvoiceDataObject = function (data = {}) {
   const ajv = new Ajv({
+    // check all rules collecting all errors, the default is to return after the first error
     allErrors: true,
     schemas: [InvoiceSchema, ItemSchema],
   });
