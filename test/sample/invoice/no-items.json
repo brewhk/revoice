@@ -1,6 +1,7 @@
 {
   "id": "yvjhn76b87808",
   "date": "2017-02-02",
+  "due": "2017-07-02",
   "issuer": {
     "name": "Brew Creative Limited",
     "logo": "http://www.brew.com.hk/images/logos/brew.png",
@@ -12,8 +13,17 @@
       "Hong Kong"
     ],
     "contact": {
+      "name": "Daniel Li",
       "tel": "+852 1234 5678",
+      "fax": "+852 1234 5678",
       "email": "dan@brew.com.hk",
+      "address": [
+        "1905, Nan Fung Centre",
+        "264-298 Castle Peak Road",
+        "Tsuen Wan",
+        "New Territories",
+        "Hong Kong"
+      ],
       "website": "http://www.brew.com.hk/"
     }
   },
@@ -24,7 +34,14 @@
       "Red Keep",
       "King's Landing",
       "Westeros"
-    ]
+    ],
+    "contact": {
+      "name": "Ser Harys Swyft",
+      "position": "Hand of the King",
+      "tel": "+852 1234 5678",
+      "email": "dan@brew.com.hk"
+    }
   },
-  "items": []
+  "items": [],
+  "comments": "Have a great day!"
 }

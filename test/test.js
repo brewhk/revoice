@@ -13,7 +13,9 @@ import randomstring from 'randomstring';
 import Revoice from '../src/index.js';
 // import Revoice from '../dist/app.js';
 
+import ExtraInvoice from './sample/invoice/extra.json';
 import ValidInvoice from './sample/invoice/valid.json';
+import MinimumInvoice from './sample/invoice/minimum.json';
 import ZeroItemsInvoice from './sample/invoice/no-items.json';
 
 describe('Revoice', function() {
@@ -70,8 +72,14 @@ describe('Revoice', function() {
     it('should return a string when there are no items in the invoice', function() {
       return expect(Revoice.validateInvoiceDataObject(ZeroItemsInvoice)).to.be.a('string');
     });
-    it('should return a true when all arguments are supplied', function() {
+    it('should return true when the minimum number of arguments are supplied', function() {
+      return expect(Revoice.validateInvoiceDataObject(MinimumInvoice)).to.equal(true);
+    });
+    it('should return true when all arguments are supplied', function() {
       return expect(Revoice.validateInvoiceDataObject(ValidInvoice)).to.equal(true);
+    });
+    it('should return true when all arguments are supplied, even if there are extra fields', function() {
+      return expect(Revoice.validateInvoiceDataObject(ExtraInvoice)).to.equal(true);
     });
   });
   describe('#generateInvoice()', function() {
