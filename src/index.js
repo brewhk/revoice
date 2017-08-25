@@ -10,15 +10,6 @@ import ItemSchema from './schema/item.json';
 
 import * as errorStrings from './errors.js';
 
-const _getTemplateUrl = function _getTemplateUrl(template) {
-  // If the template is a alphanumeric string,
-  // we assume it's using a pre-defined template
-  // and we return the path to it
-  // Otherwise, we treat it as a user-provided path,
-  // and simply return that
-  return /^[a-zA-Z0-9]+$/.test(template) ? `./templates/${template}.html` : template;
-}
-
 const Revoice = {};
 
 Revoice.DEFAULT_TEMPLATE = 'default';
@@ -29,11 +20,24 @@ Revoice.DEFAULT_OPTIONS = {
   margin: '1cm',
 }
 
+/**
+ * Get the URL of the template HTML
+ */
+Revoice.getTemplateUrl = function getTemplateUrl(template) {
+  if (!template) return `./templates/${Revoice.DEFAULT_TEMPLATE}.html`;
+  // If the template is a alphanumeric string,
+  // we assume it's using a pre-defined template
+  // and we return the path to it
+  // Otherwise, we treat it as a user-provided path,
+  // and simply return that
+  return /^[a-zA-Z0-9]+$/.test(template) ? `./templates/${template}.html` : template;
+}
+
 Revoice.getTemplate = function (template = Revoice.DEFAULT_TEMPLATE) {
   return new Promise(function (resolve, reject) {
-    fs.exists(_getTemplateUrl(template), function (fileExists) {
+    fs.exists(Revoice.getTemplateUrl(template), function (fileExists) {
       if (fileExists) {
-        fs.readFile(_getTemplateUrl(template), 'utf8', function (err, data) {
+        fs.readFile(Revoice.getTemplateUrl(template), 'utf8', function (err, data) {
           resolve(data);
         })
       } else {

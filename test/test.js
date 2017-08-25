@@ -17,6 +17,27 @@ import ValidInvoice from './sample/invoice/valid.json';
 import ZeroItemsInvoice from './sample/invoice/no-items.json';
 
 describe('Revoice', function() {
+  describe('#getTemplateUrl()', function() {
+    it('should exists', function() {
+      expect(typeof Revoice.getTemplateUrl).to.be.equal('function');
+    });
+    it('should return a string', function() {
+      expect(Revoice.getTemplateUrl()).to.be.a('string');
+    });
+    it('should return an the URL of the default template if no argument is supplied', function() {
+      return expect(Revoice.getTemplateUrl()).to.include(Revoice.DEFAULT_TEMPLATE);
+    });
+    it('should return a path to the predefined template directory when an alphanumeric string is supplied', function() {
+      const testString = randomstring.generate({
+        charset: 'alphanumeric'
+      });
+      return expect(Revoice.getTemplateUrl(testString)).to.equal(`./templates/${testString}.html`);
+    });
+    it('should return the value passed in if it is not alphanumeric', function() {
+      const testString = './test/sample/templates/test.html'
+      return expect(Revoice.getTemplateUrl(testString)).to.equal(testString);
+    });
+  });
   describe('#getTemplate()', function() {
     it('should exists', function() {
       expect(typeof Revoice.getTemplate).to.be.equal('function');
