@@ -57,6 +57,11 @@
               "description": "Name of the contact person",
               "type": "string"
             },
+            "position": {
+              "title": "Position",
+              "description": "Position / Role of the contact person",
+              "type": "string"
+            },
             "tel": {
               "title": "Telephone Number",
               "description": "Telephone number of the contact person",
@@ -116,6 +121,11 @@
             "name": {
               "title": "Name",
               "description": "Name of the contact person",
+              "type": "string"
+            },
+            "position": {
+              "title": "Position",
+              "description": "Position / Role of the contact person",
               "type": "string"
             },
             "tel": {
