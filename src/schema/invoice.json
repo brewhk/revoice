@@ -97,9 +97,9 @@
       "items": {
         "$ref": "item.json#"
       }
+    },
+    "comments": {
+      "type": "string"
     }
-  },
-  "comments": {
-    "type": "string"
   }
 }
