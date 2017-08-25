@@ -59,7 +59,7 @@ describe('Revoice', function() {
     it('should exists', function() {
       expect(typeof Revoice.validateInvoiceDataObject).to.be.equal('function');
     });
-    it('should return `true` or string', function() {
+    it('should return `true` or a string', function() {
       expect(Revoice.validateInvoiceDataObject()).to.satisfy(function (x) {
         return x === true || typeof x === 'string';
       });
