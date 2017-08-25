@@ -65,7 +65,7 @@ Revoice.generateInvoice = function (data = {}, options = Revoice.DEFAULT_OPTIONS
     const isValidInvoiceDataObject = Revoice.validateInvoiceDataObject(data);
 
     if (!isValidInvoiceDataObject) {
-      reject(new Error(errorStrings.INVALID_DATA_OBJECT + isValidInvoiceDataObject))
+      reject(new Error(errorStrings.INVALID_DATA_OBJECT + ". " + isValidInvoiceDataObject))
     }
 
     // Get the template and substitute the values in
