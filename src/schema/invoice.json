@@ -22,37 +22,68 @@
       "format": "date"
     },
     "issuer": {
+      "title": "Issuer",
+      "description": "Details of the entity issuing the invoice",
       "type": "object",
       "required": ["name", "address", "contact"],
       "properties": {
         "name": {
+          "title": "Name",
+          "description": "Name of the issuer. E.g. Acme Corp",
           "type": "string"
         },
         "logo": {
+          "title": "Logo",
+          "description": "URL of the issuer's logo",
           "type": "string",
           "format": "uri"
         },
         "address": {
+          "title": "Address",
+          "description": "List of strings comprising the address of the issuer",
           "type": "array",
           "items": { "type": "string" },
           "minItems": 2,
           "maxItems": 6
         },
         "contact": {
+          "title": "Contact Details",
+          "description": "Details of the person to contact",
           "type": "object",
-          "required": ["tel", "email"],
+          "required": ["name", "tel", "email"],
           "properties": {
+            "name": {
+              "title": "Name",
+              "description": "Name of the contact person",
+              "type": "string"
+            },
             "tel": {
+              "title": "Telephone Number",
+              "description": "Telephone number of the contact person",
               "type": "string"
             },
             "fax": {
+              "title": "Fax Number",
+              "description": "Fax number of the contact person",
               "type": "string"
             },
             "email": {
+              "title": "Email",
+              "description": "Email of the contact person",
               "type": "string",
               "format": "email"
             },
+            "address": {
+              "title": "Address",
+              "description": "List of strings comprising the address of the contact person",
+              "type": "array",
+              "items": { "type": "string" },
+              "minItems": 2,
+              "maxItems": 6
+            },
             "website": {
+              "title": "Website",
+              "description": "Website of the contact person",
               "type": "string",
               "format": "uri"
             }
@@ -65,24 +96,36 @@
       "required": ["name"],
       "properties": {
         "name": {
+          "title": "Name",
+          "description": "Name of the invoicee. E.g. East India Company",
           "type": "string"
         },
         "address": {
+          "title": "Address",
+          "description": "List of strings comprising the address of the invoicee",
           "type": "array",
           "items": { "type": "string" },
           "minItems": 2,
           "maxItems": 6
         },
         "contact": {
+          "title": "Contact Details",
+          "description": "Details of the person to contact",
           "type": "object",
           "properties": {
             "name": {
+              "title": "Name",
+              "description": "Name of the contact person",
               "type": "string"
             },
             "tel": {
+              "title": "Telephone Number",
+              "description": "Telephone number of the contact person",
               "type": "string"
             },
             "email": {
+              "title": "Email",
+              "description": "Email of the contact person",
               "type": "string",
               "format": "email"
             }
@@ -91,6 +134,8 @@
       }
     },
     "items": {
+      "title": "Items",
+      "description": "Items included into the invoice",
       "type": "array",
       "minItems": 1,
       "uniqueItems": true,
@@ -99,6 +144,8 @@
       }
     },
     "comments": {
+      "title": "Comments",
+      "description": "Any messages/comments the issuer wishes to convey to the invoicee",
       "type": "string"
     }
   }

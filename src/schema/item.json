@@ -1,8 +1,13 @@
 {
   "type": "object",
   "id": "item.json#",
-  "required": ["title", "date", "amount", "tax", "quantity"],
+  "required": ["id", "title", "date", "amount", "tax", "quantity"],
   "properties": {
+    "id": {
+      "title": "ID",
+      "description": "Unique identifier of the goods or service",
+      "type": "string"
+    },
     "title": {
       "title": "Title",
       "description": "Title of the goods or service",
