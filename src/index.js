@@ -4,6 +4,7 @@ import he from 'he';
 
 import Ajv from 'ajv';
 import phantom from 'phantom';
+import currencyFormatter from 'currency-formatter';
 
 import InvoiceSchema from './schema/invoice.json';
 import ItemSchema from './schema/item.json';
@@ -102,13 +103,7 @@ Revoice.generateInvoice = function (data = {}, options = Revoice.DEFAULT_OPTIONS
           }, 0);
         });
         handlebars.registerHelper('currency', function (currency, amount) {
-          switch (currency) {
-            case "GBP":
-              return '£' + amount;
-              break;
-            default:
-              return amount;
-          }
+          return currencyFormatter.format(amount, { code: currency });
         });
         const template = handlebars.compile(res);
         const result = he.decode(template(data));

@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "ajv": "^5.0.4-beta",
+    "currency-formatter": "^1.2.1",
     "handlebars": "^4.0.6",
     "he": "^1.1.1",
     "phantom": "^4.0.1"
