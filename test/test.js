@@ -92,8 +92,10 @@ describe('Revoice', function() {
     it('should throw an error when the template could not be found', function() {
       return expect(Revoice.generateInvoice({}, { template: randomstring.generate() })).to.eventually.be.rejectedWith(Error, "Template not found");
     });
-    it('should return the default template when none are supplied', function() {
+    it('should return the default template when nothing is supplied', function() {
       return expect(Revoice.generateInvoice()).to.eventually.have.string('<!DOCTYPE html>');
+    });
+    xit('should incorporate the data into the template', function() {
     });
   });
   describe('#generateHTMLInvoice()', function () {
@@ -114,11 +116,11 @@ describe('Revoice', function() {
     it('should throw an error when the template could not be found', function() {
       return expect(Revoice.generateHTMLInvoice({}, { template: randomstring.generate() })).to.eventually.be.rejectedWith(Error, "Template not found");
     });
-    describe('should generate output from the default template when none are supplied', function () {
+    describe('should generate output', function () {
       before(function () {
         return Revoice.generateHTMLInvoice(ValidInvoice, { template: 'default' });
       });
-      it('should generate a HTML file', function () {
+      it('should generate a HTML and a PDF file', function () {
         return expect('./tmp').to.be.a.directory().with.files(['index.html', 'index.pdf']);
       })
     });

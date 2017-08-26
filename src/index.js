@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { resolve as resolvePath } from 'path';
 import handlebars from 'handlebars';
 import he from 'he';
 
@@ -16,6 +17,7 @@ const Revoice = {};
 Revoice.DEFAULT_TEMPLATE = 'default';
 Revoice.DEFAULT_OPTIONS = {
   template: Revoice.DEFAULT_TEMPLATE,
+  destination: './tmp',
   format: 'A3',
   orientation: 'portrait',
   margin: '1cm',
@@ -59,7 +61,8 @@ Revoice.validateInvoiceDataObject = function (data = {}) {
   return valid ? true : validate.errors.map(errObj => errObj.message).join('; ');
 }
 
-Revoice.generateInvoice = function (data = {}, options = Revoice.DEFAULT_OPTIONS) {
+Revoice.generateInvoice = function (data = {}, userOptions) {
+  const options = {...Revoice.DEFAULT_OPTIONS, ...userOptions};
   return new Promise(function (resolve, reject) {
 
     // Validates the data object to ensure it has all the required fields
@@ -113,47 +116,49 @@ Revoice.generateInvoice = function (data = {}, options = Revoice.DEFAULT_OPTIONS
   });
 }
 
-Revoice.generateHTMLInvoice = function (data = {}, options = Revoice.DEFAULT_OPTIONS) {
+Revoice.generateHTMLInvoice = function (data = {}, userOptions) {
+  const options = {...Revoice.DEFAULT_OPTIONS, ...userOptions};
   return new Promise(function (resolve, reject) {
+    let phInstance = null;
     Revoice.generateInvoice(data, options)
       .then(html => {
-        fs.writeFile("tmp/index.html", html, function (err, res) {
-          if (err) {
-            reject(err);
-          } else {
-            let phInstance = null;
-            phantom.create()
-              .then(instance => {
-                phInstance = instance;
-                return instance.createPage();
-              })
-              .then(page => {
-                page.property('paperSize', {
-                  format: options.format || 'A3',
-                  orientation: options.orientation || 'portrait',
-                  margin: options.margin || '1cm',
-                });
-                page.property('settings.localToRemoteUrlAccessEnabled', true);
-                page.property('settings.webSecurityEnabled', false);
-                page.open('file://' + __dirname + '/../tmp/index.html')
-                  .then(status => {
-                    return page.render(__dirname + '/../tmp/index.pdf', {
-                      format: 'pdf'
-                    })
-                  })
-                  .then(() => {
-                    phInstance.exit();
-                    resolve();
-                  })
-              })
-            .catch(error => {
-                console.log(error);
-                phInstance.exit();
-            });
-          }
+        return new Promise(function(resolve, reject) {
+          fs.writeFile(`${options.destination}/index.html`, html, function (err, res) {
+            if (err) reject(err);
+            resolve();
+          })
         })
       })
-      .catch(err => reject(err));
+      .then(() => phantom.create())
+      .then(instance => {
+        phInstance = instance;
+        return instance.createPage();
+      })
+      .then(page => {
+        page.property('paperSize', {
+          format: options.format || 'A3',
+          orientation: options.orientation || 'portrait',
+          margin: options.margin || '1cm',
+        });
+        page.property('settings.localToRemoteUrlAccessEnabled', true);
+        page.property('settings.webSecurityEnabled', false);
+        page.open('file://' + resolvePath(`${options.destination}/index.html`))
+          .then(status => {
+            if (status === 'fail') throw new Error('Failed to generate HTML output')
+            return page.render(resolvePath(`${options.destination}/index.pdf`), {
+              format: 'pdf'
+            })
+          })
+          .then(() => {
+            phInstance.exit();
+            resolve();
+          })
+      })
+      .catch(err => {
+        reject(err);
+        console.log(err);
+        if (phInstance) phInstance.exit();
+      });
   });
 }
 
