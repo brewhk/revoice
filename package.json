@@ -1,8 +1,14 @@
 {
   "name": "revoice",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Generate HTML / PDF receipts and invoices",
   "main": "dist/lib.js",
+  "homepage": "https://github.com/brewhk/revoice",
+  "repository": "brewhk/revoice",
+  "bugs": {
+    "url" : "https://github.com/brewhk/revoice/issues",
+    "email" : "dan@danyll.com"
+  },
   "scripts": {
     "start": "yarn test -- --watch & yarn watch",
     "build": "./node_modules/webpack/bin/webpack.js",
@@ -17,7 +23,7 @@
     "payment",
     "ecommerce"
   ],
-  "author": "Daniel Li <dan@danyll.com>",
+  "author": "Daniel Li <dan@danyll.com> (http://danyll.com/)",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.24.0",
