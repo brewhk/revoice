@@ -1,12 +1,12 @@
-const webpack = require('webpack');
+const webpack = require("webpack");
 
 module.exports = {  
   entry: {
-    lib: './src/index.js',
+    lib: "./src/index.js",
   },
   output: {
-    path: './dist/',
-    filename: '[name].js',
+    path: "./dist/",
+    filename: "[name].js",
     library: "Revoice",
     libraryTarget: "umd"
   },
@@ -26,11 +26,11 @@ module.exports = {
       }
     ]
   },
-  target: 'node',
+  target: "node",
   resolve:
   {
     alias: {
-      'handlebars' : 'handlebars/dist/handlebars.min.js'
+      "handlebars" : "handlebars/dist/handlebars.min.js"
     }
   },
   stats: {
