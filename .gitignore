@@ -71,3 +71,4 @@ typings/
 coverage/
 BUILDTMP/
 tmp/
+*.lcov
