@@ -5,4 +5,6 @@ cache: yarn
 install:
   - yarn global add codecov
 script:
-  - yarn run report-coverage && codecov
+  - yarn run coverage
+  - yarn run report-coverage
+  - codecov
