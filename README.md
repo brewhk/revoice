@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/brewhk/revoice.svg?branch=master)](https://travis-ci.org/brewhk/revoice) [![codecov](https://codecov.io/gh/brewhk/revoice/branch/master/graph/badge.svg)](https://codecov.io/gh/brewhk/revoice)
+[![Build Status](https://travis-ci.org/brewhk/revoice.svg?branch=master)](https://travis-ci.org/brewhk/revoice) [![codecov](https://codecov.io/gh/brewhk/revoice/branch/master/graph/badge.svg)](https://codecov.io/gh/brewhk/revoice) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4596894093ed4de19e6d287be4c2a732)](https://www.codacy.com/app/d4nyll/revoice?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=brewhk/revoice&amp;utm_campaign=Badge_Grade)
 
 Create HTML and PDF receipts and invoices
 
