@@ -2,10 +2,11 @@ import fs from 'fs';
 import { resolve as resolvePath } from 'path';
 import handlebars from 'handlebars';
 import he from 'he';
-
 import Ajv from 'ajv';
 import phantom from 'phantom';
 import currencyFormatter from 'currency-formatter';
+import SHA512 from 'crypto-js/sha512';
+import mkdirp from 'mkdirp';
 
 import InvoiceSchema from './schema/invoice.json';
 import ItemSchema from './schema/item.json';
@@ -68,7 +69,7 @@ Revoice.generateInvoice = function (data = {}, userOptions) {
     // Validates the data object to ensure it has all the required fields
     const isValidInvoiceDataObject = Revoice.validateInvoiceDataObject(data);
 
-    if (!isValidInvoiceDataObject) {
+    if (isValidInvoiceDataObject !== true) {
       reject(new Error(errorStrings.INVALID_DATA_OBJECT + ". " + isValidInvoiceDataObject))
     }
 
@@ -116,14 +117,27 @@ Revoice.generateInvoice = function (data = {}, userOptions) {
   });
 }
 
+Revoice.generateFileName = function generateFileName(content, type) {
+  switch(type) {
+    case 'hash':
+    default:
+      return SHA512(JSON.stringify(content)).toString();
+  }
+}
+
 Revoice.generateHTMLInvoice = function (data = {}, userOptions) {
   const options = {...Revoice.DEFAULT_OPTIONS, ...userOptions};
   return new Promise(function (resolve, reject) {
     let phInstance = null;
+    let filename = "index";
     Revoice.generateInvoice(data, options)
       .then(html => {
         return new Promise(function(resolve, reject) {
-          fs.writeFile(`${options.destination}/index.html`, html, function (err, res) {
+          // Generate a new file name
+          filename = options.name || Revoice.generateFileName(html, options.nomenclature);
+          // If the directory to write the file in does not exists, create it
+          mkdirp.sync(options.destination);
+          fs.writeFile(`${options.destination}/${filename}.html`, html, function (err, res) {
             if (err) reject(err);
             resolve();
           })
@@ -142,10 +156,10 @@ Revoice.generateHTMLInvoice = function (data = {}, userOptions) {
         });
         page.property('settings.localToRemoteUrlAccessEnabled', true);
         page.property('settings.webSecurityEnabled', false);
-        page.open('file://' + resolvePath(`${options.destination}/index.html`))
+        page.open('file://' + resolvePath(`${options.destination}/${filename}.html`))
           .then(status => {
             if (status === 'fail') throw new Error('Failed to generate HTML output')
-            return page.render(resolvePath(`${options.destination}/index.pdf`), {
+            return page.render(resolvePath(`${options.destination}/${filename}.pdf`), {
               format: 'pdf'
             })
           })

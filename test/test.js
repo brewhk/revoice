@@ -1,5 +1,6 @@
 import fs from 'fs';
 import rimraf from 'rimraf';
+import SHA512 from 'crypto-js/sha512';
 
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
@@ -90,39 +91,70 @@ describe('Revoice', function() {
       expect(Revoice.generateInvoice()).to.be.a('promise');
     });
     it('should throw an error when the template could not be found', function() {
-      return expect(Revoice.generateInvoice({}, { template: randomstring.generate() })).to.eventually.be.rejectedWith(Error, "Template not found");
+      return expect(Revoice.generateInvoice(MinimumInvoice, { template: randomstring.generate() })).to.eventually.be.rejectedWith(Error, "Template not found");
     });
     it('should return the default template when nothing is supplied', function() {
-      return expect(Revoice.generateInvoice()).to.eventually.have.string('<!DOCTYPE html>');
+      return expect(Revoice.generateInvoice(MinimumInvoice)).to.eventually.have.string('<!DOCTYPE html>');
     });
     xit('should incorporate the data into the template', function() {
     });
   });
   describe('#generateHTMLInvoice()', function () {
-    before(function (done) {
-      const path = './tmp';
-      // Remove and re-created directory
-      rimraf(path, function () {
-        fs.mkdirSync(path);
-        done();
-      });
-    });
+    const baseTestPath = `revoice-tmp-invoice-${randomstring.generate()}`;
     it('should exists', function() {
       expect(typeof Revoice.generateHTMLInvoice).to.be.equal('function');
     });
     it('should return a promise', function() {
-      expect(Revoice.generateHTMLInvoice()).to.be.a('promise');
+      const path = `./${baseTestPath}/${randomstring.generate()}`;
+      expect(Revoice.generateHTMLInvoice({}, {
+        destination: path,
+      })).to.be.a('promise');
+    });
+    it('should throw an error when the data object is not valid', function() {
+      return expect(Revoice.generateHTMLInvoice(12)).to.eventually.be.rejected;
     });
     it('should throw an error when the template could not be found', function() {
-      return expect(Revoice.generateHTMLInvoice({}, { template: randomstring.generate() })).to.eventually.be.rejectedWith(Error, "Template not found");
+      return expect(Revoice.generateHTMLInvoice(MinimumInvoice, { template: randomstring.generate() })).to.eventually.be.rejectedWith(Error, "Template not found");
     });
-    describe('should generate output', function () {
-      before(function () {
-        return Revoice.generateHTMLInvoice(ValidInvoice, { template: 'default' });
+    context('when called on the same data', function () {
+      this.timeout(6000);
+      it('should produce invoices of the same name when the hash naming option is chosen', async function() {
+        const path = `./${baseTestPath}/${randomstring.generate()}`;
+        const html = await Revoice.generateInvoice(ValidInvoice)
+        const filename = SHA512(JSON.stringify(html)).toString();
+        await Revoice.generateHTMLInvoice(ValidInvoice, {
+          destination: path,
+          nomenclature: "hash"
+        });
+        return expect(path).to.be.a.directory().with.files([`${filename}.html`, `${filename}.pdf`]);
       });
-      it('should generate a HTML and a PDF file', function () {
-        return expect('./tmp').to.be.a.directory().with.files(['index.html', 'index.pdf']);
-      })
+      xit('should produce invoices with incrementally increasing numbers if the number option is chosen', async function() {
+        const path = `./${baseTestPath}/${randomstring.generate()}`;
+        await Revoice.generateHTMLInvoice(ValidInvoice, {
+          destination: path,
+          nomenclature: "number"
+        });
+        await Revoice.generateHTMLInvoice(ValidInvoice, {
+          destination: path,
+          nomenclature: "number"
+        });
+        return expect(path).to.be.a.directory().with.files(['1.html', '1.pdf', '2.html', '2.pdf']);
+      });
+    });
+  
+    it('should generate a HTML and a PDF file', async function () {
+      this.timeout(6000);
+      const path = `./${baseTestPath}/${randomstring.generate()}`;
+      await Revoice.generateHTMLInvoice(ValidInvoice, {
+        template: 'default',
+        destination: path,
+        name: 'index'
+      });
+      return expect(path).to.be.a.directory().with.files(['index.html', 'index.pdf']);
+    });
+    after(function (done) {
+      // Remove default test directory
+      rimraf(baseTestPath, done);
     });
   });
 });

@@ -2,3 +2,7 @@ language: node_js
 node_js:
   - "node"
 cache: yarn
+install:
+  - yarn global add codecov
+script:
+  - yarn run report-coverage && codecov
