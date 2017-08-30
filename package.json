@@ -1,6 +1,6 @@
 {
   "name": "revoice",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Generate HTML / PDF receipts and invoices",
   "main": "dist/index.js",
   "homepage": "https://github.com/brewhk/revoice",
@@ -52,6 +52,6 @@
     "handlebars": "^4.0.10",
     "he": "^1.1.1",
     "mkdirp": "^0.5.1",
-    "phantom": "^4.0.5"
+    "phantom": "^2.1.21"
   }
 }
