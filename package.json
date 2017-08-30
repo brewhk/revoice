@@ -15,7 +15,8 @@
     "watch": "./node_modules/webpack/bin/webpack.js --watch",
     "test": "./node_modules/mocha/bin/mocha --require babel-register",
     "coverage": "cross-env NODE_ENV=test nyc yarn test",
-    "report-coverage": "cross-env NODE_ENV=test nyc report --reporter=lcov && cp ./coverage/lcov.info coverage.lcov"
+    "report-coverage": "cross-env NODE_ENV=test nyc report --reporter=lcov && cp ./coverage/lcov.info coverage.lcov",
+    "prepublishOnly": "yarn licenses generate-disclaimer > DISCLAIMER"
   },
   "keywords": [
     "receipt",
