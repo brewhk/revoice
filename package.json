@@ -1,6 +1,6 @@
 {
   "name": "revoice",
-  "version": "0.1.6",
+  "version": "0.1.8",
   "description": "Generate HTML / PDF receipts and invoices",
   "main": "dist/index.js",
   "homepage": "https://github.com/brewhk/revoice",
@@ -16,8 +16,7 @@
     "test": "./node_modules/mocha/bin/mocha --require babel-register",
     "coverage": "cross-env NODE_ENV=test nyc yarn test",
     "report-coverage": "cross-env NODE_ENV=test nyc report --reporter=lcov && cp ./coverage/lcov.info coverage.lcov",
-    "postinstall": "yarn run build",
-    "prepublishOnly": "yarn licenses generate-disclaimer > DISCLAIMER && yarn run build"
+    "prepare": "yarn licenses generate-disclaimer > DISCLAIMER && yarn run build"
   },
   "keywords": [
     "receipt",
@@ -28,6 +27,7 @@
   "author": "Daniel Li <dan@danyll.com> (http://danyll.com/)",
   "license": "MIT",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-istanbul": "^4.1.1",
@@ -42,17 +42,16 @@
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "nyc": "^11.1.0",
-    "randomstring": "^1.1.5"
+    "randomstring": "^1.1.5",
+    "rimraf": "^2.6.1"
   },
   "dependencies": {
     "ajv": "^5.2.2",
-    "babel-cli": "^6.26.0",
     "crypto-js": "^3.1.9-1",
     "currency-formatter": "^1.2.1",
     "handlebars": "^4.0.10",
     "he": "^1.1.1",
     "mkdirp": "^0.5.1",
-    "phantom": "^4.0.5",
-    "rimraf": "^2.6.1"
+    "phantom": "^4.0.5"
   }
 }
