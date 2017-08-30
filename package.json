@@ -1,8 +1,8 @@
 {
   "name": "revoice",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Generate HTML / PDF receipts and invoices",
-  "main": "dist/lib.js",
+  "main": "dist/index.js",
   "homepage": "https://github.com/brewhk/revoice",
   "repository": "brewhk/revoice",
   "bugs": {
@@ -11,8 +11,8 @@
   },
   "scripts": {
     "start": "yarn test -- --watch & yarn watch",
-    "build": "./node_modules/webpack/bin/webpack.js",
-    "watch": "./node_modules/webpack/bin/webpack.js --watch",
+    "build": "./node_modules/.bin/rimraf './dist' && ./node_modules/.bin/babel src --out-dir dist",
+    "watch": "yarn run build -- --watch",
     "test": "./node_modules/mocha/bin/mocha --require babel-register",
     "coverage": "cross-env NODE_ENV=test nyc yarn test",
     "report-coverage": "cross-env NODE_ENV=test nyc report --reporter=lcov && cp ./coverage/lcov.info coverage.lcov",
@@ -27,6 +27,7 @@
   "author": "Daniel Li <dan@danyll.com> (http://danyll.com/)",
   "license": "MIT",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-istanbul": "^4.1.1",
@@ -42,8 +43,7 @@
     "mocha": "^3.2.0",
     "nyc": "^11.1.0",
     "randomstring": "^1.1.5",
-    "rimraf": "^2.6.1",
-    "webpack": "^3.5.5"
+    "rimraf": "^2.6.1"
   },
   "dependencies": {
     "ajv": "^5.2.2",
