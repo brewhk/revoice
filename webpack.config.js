@@ -2,10 +2,10 @@ const webpack = require("webpack");
 
 module.exports = {  
   entry: {
-    lib: "./src/index.js",
+    lib: __dirname + "/src/index.js",
   },
   output: {
-    path: "./dist/",
+    path: __dirname + "/dist/",
     filename: "[name].js",
     library: "Revoice",
     libraryTarget: "umd"
