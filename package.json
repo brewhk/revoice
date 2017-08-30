@@ -6,8 +6,8 @@
   "homepage": "https://github.com/brewhk/revoice",
   "repository": "brewhk/revoice",
   "bugs": {
-    "url" : "https://github.com/brewhk/revoice/issues",
-    "email" : "dan@danyll.com"
+    "url": "https://github.com/brewhk/revoice/issues",
+    "email": "dan@danyll.com"
   },
   "scripts": {
     "start": "yarn test -- --watch & yarn watch",
