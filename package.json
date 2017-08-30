@@ -1,6 +1,6 @@
 {
   "name": "revoice",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Generate HTML / PDF receipts and invoices",
   "main": "dist/index.js",
   "homepage": "https://github.com/brewhk/revoice",
@@ -16,6 +16,7 @@
     "test": "./node_modules/mocha/bin/mocha --require babel-register",
     "coverage": "cross-env NODE_ENV=test nyc yarn test",
     "report-coverage": "cross-env NODE_ENV=test nyc report --reporter=lcov && cp ./coverage/lcov.info coverage.lcov",
+    "preinstall": "yarn run build",
     "prepublishOnly": "yarn licenses generate-disclaimer > DISCLAIMER && yarn run build"
   },
   "keywords": [
