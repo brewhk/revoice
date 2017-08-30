@@ -73,3 +73,4 @@ BUILDTMP/
 tmp/
 *.lcov
 DISCLAIMER
+dist/
