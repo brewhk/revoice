@@ -20,7 +20,7 @@ const Revoice = {};
 Revoice.DEFAULT_TEMPLATE = 'default';
 Revoice.DEFAULT_OPTIONS = {
   template: Revoice.DEFAULT_TEMPLATE,
-  destination: './tmp',
+  destination: `${process.env.PWD}/tmp`,
   format: 'A3',
   orientation: 'portrait',
   margin: '1cm',
