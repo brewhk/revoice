@@ -13,6 +13,8 @@ import ItemSchema from './schema/item.json';
 
 import * as errorStrings from './errors.js';
 
+import appRoot from 'app-root-path';
+
 const Revoice = {};
 
 Revoice.DEFAULT_TEMPLATE = 'default';
@@ -28,13 +30,13 @@ Revoice.DEFAULT_OPTIONS = {
  * Get the URL of the template HTML
  */
 Revoice.getTemplateUrl = function getTemplateUrl(template) {
-  if (!template) return `./templates/${Revoice.DEFAULT_TEMPLATE}.html`;
+  if (!template) return `${appRoot}/templates/${Revoice.DEFAULT_TEMPLATE}.html`;
   // If the template is a alphanumeric string,
   // we assume it's using a pre-defined template
   // and we return the path to it
   // Otherwise, we treat it as a user-provided path,
   // and simply return that
-  return /^[a-zA-Z0-9]+$/.test(template) ? `./templates/${template}.html` : template;
+  return /^[a-zA-Z0-9]+$/.test(template) ? `${appRoot}/templates/${template}.html` : template;
 }
 
 Revoice.getTemplate = function (template = Revoice.DEFAULT_TEMPLATE) {
