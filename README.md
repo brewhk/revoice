@@ -4,7 +4,7 @@ Create HTML and PDF receipts and invoices
 
 ## Examples
 
-* [HTML](./examples/default/index.html)
+* [HTML](https://default-invoice.neocities.org)
 * [PDF](./examples/default/index.pdf)
 
 ## Overview
