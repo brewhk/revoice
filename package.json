@@ -1,6 +1,6 @@
 {
   "name": "revoice",
-  "version": "0.1.13",
+  "version": "0.1.15",
   "description": "Generate HTML / PDF receipts and invoices",
   "main": "dist/index.js",
   "homepage": "https://github.com/brewhk/revoice",
@@ -47,7 +47,6 @@
   },
   "dependencies": {
     "ajv": "^5.2.2",
-    "app-root-path": "^2.0.1",
     "crypto-js": "^3.1.9-1",
     "currency-formatter": "^1.2.1",
     "handlebars": "^4.0.10",

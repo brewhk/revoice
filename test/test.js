@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { resolve as resolvePath } from 'path';
 import rimraf from 'rimraf';
 import SHA512 from 'crypto-js/sha512';
 
@@ -12,7 +13,6 @@ const expect = chai.expect;
 import randomstring from 'randomstring';
 
 import Revoice from '../src/index.js';
-// import Revoice from '../dist/app.js';
 
 import ExtraInvoice from './sample/invoice/extra.json';
 import ValidInvoice from './sample/invoice/valid.json';
@@ -34,11 +34,11 @@ describe('Revoice', function() {
       const testString = randomstring.generate({
         charset: 'alphanumeric'
       });
-      return expect(Revoice.getTemplateUrl(testString)).to.equal(`./templates/${testString}.html`);
+      return expect(Revoice.getTemplateUrl(testString)).to.equal(resolvePath(`${__dirname}/../templates/${testString}.html`));
     });
     it('should return the value passed in if it is not alphanumeric', function() {
-      const testString = './test/sample/templates/test.html'
-      return expect(Revoice.getTemplateUrl(testString)).to.equal(testString);
+      const testString = `${__dirname}/sample/templates/test.html`
+      return expect(Revoice.getTemplateUrl(testString)).to.equal(resolvePath(testString));
     });
   });
   describe('#getTemplate()', function() {
@@ -122,7 +122,7 @@ describe('Revoice', function() {
         const path = `./${baseTestPath}/${randomstring.generate()}`;
         const html = await Revoice.generateInvoice(ValidInvoice)
         const filename = SHA512(JSON.stringify(html)).toString();
-        await Revoice.generateHTMLInvoice(ValidInvoice, {
+        const asd = await Revoice.generateHTMLInvoice(ValidInvoice, {
           destination: path,
           nomenclature: "hash"
         });
