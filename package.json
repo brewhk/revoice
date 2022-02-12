@@ -46,7 +46,7 @@
     "rimraf": "^2.6.1"
   },
   "dependencies": {
-    "ajv": "^5.2.2",
+    "ajv": "^6.12.3",
     "app-root-path": "^2.0.1",
     "crypto-js": "^3.1.9-1",
     "currency-formatter": "^1.2.1",
